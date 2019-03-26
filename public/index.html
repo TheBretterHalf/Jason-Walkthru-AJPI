@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HomeBase App</title>
+</head>
+<script type="text/javascript">
+    function makeGETRequest() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this)
+                document.getElementById("getResponse").innerHTML = this.responseText
+           }
+        };
+        
+        xhttp.open("GET","https://cors-anywhere.herokuapp.com/https://careerdev-teaching-lujason2015.c9users.io/api", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(); 
+    };
+    //MAKE POST REQUEST
+    function makePOSTRequest() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this)
+                document.getElementById("postResponse").innerHTML = this.responseText
+           }
+        };
+        //open(method, url, async)
+        xhttp.open("POST","https://cors-anywhere.herokuapp.com/https://careerdev-teaching-lujason2015.c9users.io/api", true);
+        //set header to match content type
+        xhttp.setRequestHeader("Content-type", "application/json");
+        const data = {
+            "employeeID": document.getElementById("employeeName").value
+        };
+        xhttp.send(JSON.stringify(data)); 
+    }    
+</script>
+<body>
+    <p>Hello World</p>
+    <div>
+        Static Page
+    </div>
+        <!--<form onsubmit="makePOSTRequest(); return false">-->
+        <button onclick="makeGETRequest();">Get Request</button>
+        <p id="getResponse"></p>
+        <p>Employee Name</p>
+        <input id="employeeName" type="text"/>
+        <button onclick="makePOSTRequest()">Post Request</button>
+        <p id="postResponse"></p>
+    <!--</form>-->
+</body>
+</html>
